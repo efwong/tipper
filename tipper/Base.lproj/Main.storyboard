@@ -3,10 +3,11 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Tip Calculator-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="tipper" customModuleProvider="target" sceneMemberID="viewController">
@@ -28,12 +29,12 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gcN-Wc-NLC">
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="150" id="UFX-VD-rvm"/>
-                                                </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="decimalPad" keyboardAppearance="alert"/>
+                                                <connections>
+                                                    <action selector="calculateTip:" destination="BYZ-38-t0r" eventType="editingChanged" id="xmg-3e-DHF"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvv-xY-K71">
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -47,6 +48,7 @@
                                             <constraint firstAttribute="trailing" secondItem="gcN-Wc-NLC" secondAttribute="trailing" constant="20" id="7HE-Ui-eJU"/>
                                             <constraint firstItem="O9T-5S-CFP" firstAttribute="leading" secondItem="Hqe-Se-JYQ" secondAttribute="leading" constant="20" id="7Xb-n5-1pR"/>
                                             <constraint firstItem="fvv-xY-K71" firstAttribute="centerY" secondItem="Hqe-Se-JYQ" secondAttribute="centerY" id="HYa-10-gWq"/>
+                                            <constraint firstItem="gcN-Wc-NLC" firstAttribute="width" secondItem="Hqe-Se-JYQ" secondAttribute="width" multiplier="0.4" id="N3r-bN-XHW"/>
                                             <constraint firstItem="gcN-Wc-NLC" firstAttribute="leading" secondItem="fvv-xY-K71" secondAttribute="trailing" constant="5" id="Ojw-r9-v05"/>
                                             <constraint firstAttribute="height" constant="60" id="nrE-22-ove"/>
                                             <constraint firstItem="O9T-5S-CFP" firstAttribute="centerY" secondItem="Hqe-Se-JYQ" secondAttribute="centerY" id="v6u-gr-w90"/>
@@ -80,12 +82,15 @@
                                             <constraint firstItem="1ko-Dk-bzj" firstAttribute="centerY" secondItem="WMZ-YT-5VU" secondAttribute="centerY" id="tYz-Ec-3E3"/>
                                         </constraints>
                                     </view>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vYg-NS-bfP">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vYg-NS-bfP">
                                         <segments>
-                                            <segment title="18%"/>
+                                            <segment title="15%"/>
                                             <segment title="20%"/>
                                             <segment title="25%"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="calculateTip:" destination="BYZ-38-t0r" eventType="valueChanged" id="Hhr-aq-kGd"/>
+                                        </connections>
                                     </segmentedControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7g-98-v5n">
                                         <subviews>
@@ -147,6 +152,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="AaP-pE-kst" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2kj-9G-rgV"/>
                             <constraint firstAttribute="trailing" secondItem="AaP-pE-kst" secondAttribute="trailing" constant="10" id="8OP-HS-4Eq"/>
@@ -154,10 +160,24 @@
                             <constraint firstItem="AaP-pE-kst" firstAttribute="top" relation="lessThanOrEqual" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="80" id="VZA-Fe-wZw"/>
                             <constraint firstItem="AaP-pE-kst" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" priority="900" id="aH4-lW-CL2"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="qbL-69-bKK" appends="YES" id="Qhf-LS-sUW"/>
+                        </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="leO-VW-CjG"/>
+                    <navigationItem key="navigationItem" title="Tip Calculator" id="leO-VW-CjG"/>
+                    <connections>
+                        <outlet property="billField" destination="gcN-Wc-NLC" id="TDv-C4-mu1"/>
+                        <outlet property="tipControl" destination="vYg-NS-bfP" id="Ps6-g6-dfb"/>
+                        <outlet property="tipLabel" destination="1ko-Dk-bzj" id="40H-5S-GzI"/>
+                        <outlet property="totalLabel" destination="EjS-YC-bDI" id="P3n-DB-QuQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="qbL-69-bKK">
+                    <connections>
+                        <action selector="onTap:" destination="BYZ-38-t0r" id="tjs-q5-cnd"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="676" y="-645.42728635682158"/>
         </scene>
