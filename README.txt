@@ -38,15 +38,15 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Describe any challenges encountered while building the app.
 
-# Passing Data between views:  I wanted my main TipViewController to update total values returning from the SettingsViewTableController, but I couldn't find out how to have the TipViewController recognize that event.  Instead, I made the TipViewController implement an update delegate that the SettingsViewTableController would call to update total values.
+* Passing Data between views:  I wanted my main TipViewController to update total values returning from the SettingsViewTableController, but I couldn't find out how to have the TipViewController recognize that event.  Instead, I made the TipViewController implement an update delegate that the SettingsViewTableController would call to update total values.
 
-# Understanding the view and app life cycle so that I can add specific events at the right time (eg. saving settings, time the app was closed)
+* Understanding the view and app life cycle so that I can add specific events at the right time (eg. saving settings, time the app was closed)
 
 ## To Do
 
-# Formatting the Bill value correctly: I want the bill textbox to restrict format to a currency format, and not allow multiple decimals or values with greater than 2 decimal places. This is still a work in progress.
+* Formatting the Bill value correctly: I want the bill textbox to restrict format to a currency format, and not allow multiple decimals or values with greater than 2 decimal places. This is still a work in progress.
 
-# First text input should clear textbox: Because of the formatting issue above (always adding .00 to the end of the input), when the keyboard first pops up, if the previous value had decimals (eg. $10.00), the next keypress would add a number to the end of the textbox, but I would rather it clear the input and insert a new value.
+* First text input should clear textbox: Because of the formatting issue above (always adding .00 to the end of the input), when the keyboard first pops up, if the previous value had decimals (eg. $10.00), the next keypress would add a number to the end of the textbox, but I would rather it clear the input and insert a new value.
 
 
 ## License
