@@ -16,6 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let previousTime = UserSettingsService.service.getTime()
+        let duration = NSDate.timeIntervalSinceReferenceDate - previousTime
+        
+        if(duration > 600){ // duration exceeded 10 minutes
+            if !UserSettingsService.service.saveBill(value: 0){
+                print("Error while saving bill")
+            }
+        }
+        
         return true
     }
 
@@ -39,6 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        // Save last date time
+        UserSettingsService.service.saveTime()
     }
 
 
