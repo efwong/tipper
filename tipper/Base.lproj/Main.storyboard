@@ -67,17 +67,11 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezR-8O-qdv">
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="ezR-8O-qdv" firstAttribute="centerY" secondItem="WMZ-YT-5VU" secondAttribute="centerY" id="CQo-qo-YI2"/>
                                             <constraint firstAttribute="trailing" secondItem="1ko-Dk-bzj" secondAttribute="trailing" constant="20" id="QXG-gl-Ox2"/>
-                                            <constraint firstItem="1ko-Dk-bzj" firstAttribute="leading" secondItem="ezR-8O-qdv" secondAttribute="trailing" constant="5" id="YLh-cM-TZ1"/>
+                                            <constraint firstItem="1ko-Dk-bzj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XNA-Wg-y4W" secondAttribute="trailing" priority="750" id="Z4S-La-LZd"/>
                                             <constraint firstItem="XNA-Wg-y4W" firstAttribute="leading" secondItem="WMZ-YT-5VU" secondAttribute="leading" constant="20" id="mi6-D1-Igo"/>
                                             <constraint firstItem="XNA-Wg-y4W" firstAttribute="centerY" secondItem="WMZ-YT-5VU" secondAttribute="centerY" id="tYQ-al-DkZ"/>
                                             <constraint firstItem="1ko-Dk-bzj" firstAttribute="centerY" secondItem="WMZ-YT-5VU" secondAttribute="centerY" id="tYz-Ec-3E3"/>
@@ -91,7 +85,6 @@
                                         </segments>
                                         <color key="tintColor" red="0.1529411765" green="0.61568627450000002" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <action selector="calculateTip:" destination="BYZ-38-t0r" eventType="valueChanged" id="Hhr-aq-kGd"/>
                                             <action selector="changeTipAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="Xqs-wF-GKc"/>
                                         </connections>
                                     </segmentedControl>
@@ -107,20 +100,14 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYs-8q-NpR">
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="7aS-0e-qDC" firstAttribute="leading" secondItem="c7g-98-v5n" secondAttribute="leading" constant="20" id="4oa-k4-OVN"/>
-                                            <constraint firstItem="EjS-YC-bDI" firstAttribute="leading" secondItem="ZYs-8q-NpR" secondAttribute="trailing" constant="5" id="CdI-BH-WdQ"/>
                                             <constraint firstAttribute="trailing" secondItem="EjS-YC-bDI" secondAttribute="trailing" constant="20" id="Hm2-A9-eRv"/>
+                                            <constraint firstItem="EjS-YC-bDI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7aS-0e-qDC" secondAttribute="trailing" priority="750" id="JvY-Yl-fTb"/>
                                             <constraint firstItem="7aS-0e-qDC" firstAttribute="centerY" secondItem="c7g-98-v5n" secondAttribute="centerY" id="Kic-Hq-lBl"/>
                                             <constraint firstItem="EjS-YC-bDI" firstAttribute="centerY" secondItem="c7g-98-v5n" secondAttribute="centerY" id="ddL-nf-tmq"/>
-                                            <constraint firstItem="ZYs-8q-NpR" firstAttribute="centerY" secondItem="c7g-98-v5n" secondAttribute="centerY" id="y02-o5-AZt"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UW8-nM-nyQ">
@@ -163,9 +150,6 @@
                             <constraint firstItem="AaP-pE-kst" firstAttribute="top" relation="lessThanOrEqual" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="80" id="VZA-Fe-wZw"/>
                             <constraint firstItem="AaP-pE-kst" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" priority="900" id="aH4-lW-CL2"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="qbL-69-bKK" appends="YES" id="Qhf-LS-sUW"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Tip Calculator" id="leO-VW-CjG">
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="Bbz-yL-79d">
@@ -176,17 +160,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="billField" destination="gcN-Wc-NLC" id="TDv-C4-mu1"/>
+                        <outlet property="currencySymbol" destination="fvv-xY-K71" id="RJW-gH-KYE"/>
                         <outlet property="tipControl" destination="vYg-NS-bfP" id="Ps6-g6-dfb"/>
                         <outlet property="tipLabel" destination="1ko-Dk-bzj" id="40H-5S-GzI"/>
                         <outlet property="totalLabel" destination="EjS-YC-bDI" id="P3n-DB-QuQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="qbL-69-bKK">
-                    <connections>
-                        <action selector="onTap:" destination="BYZ-38-t0r" id="tjs-q5-cnd"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="676" y="-645.42728635682158"/>
         </scene>

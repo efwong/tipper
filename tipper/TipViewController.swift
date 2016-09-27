@@ -15,6 +15,7 @@ class TipViewController: UIViewController, TipperUpdateProtocol, UITextFieldDele
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tipControl: UISegmentedControl!
+    @IBOutlet weak var currencySymbol: UILabel!
     
     // MARK: internal properties
     private var tipPercentages: [Double] = [0.15, 0.2, 0.25]
@@ -27,6 +28,10 @@ class TipViewController: UIViewController, TipperUpdateProtocol, UITextFieldDele
         // Do any additional setup after loading the view, typically from a nib.
         updateTipper() // update segmented tip control and update tip when entering view (in case settings tip% changes)
         
+        // load currency symbol
+        let locale = Locale.current
+        currencySymbol.text = locale.currencySymbol
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,26 +41,25 @@ class TipViewController: UIViewController, TipperUpdateProtocol, UITextFieldDele
 
     // MARK: events
     
-    // on screen tap, hide keyboard, save bill and tip index
-    @IBAction func onTap(_ sender: AnyObject) {
-        // force keyboard hide
-        view.endEditing(true)
-        saveBillAndTipIndex()
-    }
-    
-    // Update tip values when entering bill
+    // Update tip values when typing bill into billField
+    // save bill to UserSettings
     @IBAction func calculateTip(_ sender: AnyObject) {
-        calculateTipInternal()
+        updateTipView()
+        saveBill()
     }
     
     
-    
+    // Fires when user changes the tip percent segmented control
+    // updates the saved tip % and the generated tips and total fields
     @IBAction func changeTipAction(_ sender: AnyObject) {
         if !UserSettingsService.service.saveTipPercentControlIndex(index: tipControl.selectedSegmentIndex){
             print("Error: unable to save index")
         }
+        updateTipView()
     }
     
+    // Fires when user attempts to navigate to Settings view
+    // passes delegate information to Settings view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "showSettings"){
             if let view = segue.destination as? SettingsTableViewController{
@@ -75,8 +79,8 @@ class TipViewController: UIViewController, TipperUpdateProtocol, UITextFieldDele
     
     // allow Settings Controller to fire updateProtocol
     func updateTipper() {
-        updateTipControl()
-        calculateTipInternal()
+        updateTipControl() // save tip index
+        updateTipView()
     }
 
     // MARK: private methods
@@ -85,25 +89,20 @@ class TipViewController: UIViewController, TipperUpdateProtocol, UITextFieldDele
     // Update UI to reflect state
     private func loadSavedBillAndTipIndex(){
         let bill: Double = UserSettingsService.service.getBill()
+        // if bill == 0, then just ignore it and leave textfield empty
+        let billString = (bill != 0) ? FormatUtility.decimalToString(value: bill) : ""
         let tippingPercentIndex: Int = UserSettingsService.service.getTipPercentControlIndex()
-        
-        //let formatter = NumberFormatter()
-        //formatter.minimum = 0
-        //formatter.minimumFractionDigits=0
-        //formatter.numberStyle = .currency
-        //billField.text = formatter.string(from: NSNumber(value: bill))
-        billField.text = (bill != 0 ? String(format: "%.2f", bill): "")
+        billField.text = billString
         tipControl.selectedSegmentIndex = tippingPercentIndex
     }
     
-    private func saveBillAndTipIndex(){
-        let bill = Double(billField.text!) ?? 0
-        let tipIndex = tipControl.selectedSegmentIndex
-        
-        if !UserSettingsService.service.saveBill(value: bill) ||
-            !UserSettingsService.service.saveTipPercentControlIndex(index: tipIndex){
-            print("Error has occurred with saving Bill or Tip Index")
+    // save bill to UserSettings
+    private func saveBill(){
+        let bill = FormatUtility.numberStringToDecimal(word: billField.text!) ?? 0
+        if !UserSettingsService.service.saveBill(value: bill) {
+            print("Error: unable to save bill")
         }
+        
     }
     
     // Fetch tip percentage from service and update the segmented control
@@ -117,13 +116,13 @@ class TipViewController: UIViewController, TipperUpdateProtocol, UITextFieldDele
     }
     
     // Calculate tip and update view
-    private func calculateTipInternal(){
-        let bill = Double(billField.text!) ?? 0
+    private func updateTipView(){
+        let bill = FormatUtility.numberStringToDecimal(word: billField.text!) ?? 0
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
         let total = bill + tip
         
-        tipLabel.text = String(format: "%.2f", tip)
-        totalLabel.text = String(format: "%.2f", total)
+        tipLabel.text = FormatUtility.numberToCurrencyString(value: tip as NSNumber) ?? ""
+        totalLabel.text = FormatUtility.numberToCurrencyString(value: total as NSNumber) ?? ""
     }
     
     

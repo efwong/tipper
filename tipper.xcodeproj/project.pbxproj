@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5E466CFE1D9860A200B7CAE9 /* TipperUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E466CFD1D9860A200B7CAE9 /* TipperUpdateProtocol.swift */; };
+		5E6531BD1D9A357B006C6132 /* FormatUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6531BC1D9A357B006C6132 /* FormatUtility.swift */; };
 		5E9B3C471D97710500A28D28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9B3C461D97710500A28D28 /* AppDelegate.swift */; };
 		5E9B3C491D97710500A28D28 /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9B3C481D97710500A28D28 /* TipViewController.swift */; };
 		5E9B3C4C1D97710500A28D28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E9B3C4A1D97710500A28D28 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		5E466CFD1D9860A200B7CAE9 /* TipperUpdateProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipperUpdateProtocol.swift; sourceTree = "<group>"; };
+		5E6531BC1D9A357B006C6132 /* FormatUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatUtility.swift; sourceTree = "<group>"; };
 		5E9B3C431D97710500A28D28 /* tipper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tipper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E9B3C461D97710500A28D28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E9B3C481D97710500A28D28 /* TipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				5E9B3C521D97710500A28D28 /* Info.plist */,
 				5E9B3C761D97C0BF00A28D28 /* SettingsTableViewController.swift */,
 				5ECF95F41D97C6FB004DE278 /* Services */,
+				5E6531BC1D9A357B006C6132 /* FormatUtility.swift */,
 			);
 			path = tipper;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E9B3C491D97710500A28D28 /* TipViewController.swift in Sources */,
+				5E6531BD1D9A357B006C6132 /* FormatUtility.swift in Sources */,
 				5E466CFE1D9860A200B7CAE9 /* TipperUpdateProtocol.swift in Sources */,
 				5ECF95F31D97C6F0004DE278 /* UserSettingsService.swift in Sources */,
 				5E9B3C471D97710500A28D28 /* AppDelegate.swift in Sources */,
