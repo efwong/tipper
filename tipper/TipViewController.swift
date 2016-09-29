@@ -16,6 +16,9 @@ class TipViewController: UIViewController, TipperUpdateProtocol, UITextFieldDele
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tipControl: UISegmentedControl!
     @IBOutlet weak var currencySymbol: UILabel!
+    @IBOutlet weak var billSplitField: UILabel!
+    @IBOutlet weak var billSlider: UISlider!
+    @IBOutlet weak var billSplitFactor: UILabel!
     
     // MARK: internal properties
     private var tipPercentages: [Double] = [0.15, 0.2, 0.25]
@@ -58,6 +61,15 @@ class TipViewController: UIViewController, TipperUpdateProtocol, UITextFieldDele
         updateTipView()
     }
     
+    // when bill split value changes, update per person bill
+    @IBAction func sliderValueChanged(_ sender: UISlider) {
+        let discreteValue:Float = Float(lroundf(sender.value))
+        sender.setValue(discreteValue, animated: true)
+        billSplitFactor.text = String(format: "x%d", Int(discreteValue))//"x\(discreteValue)"
+        updateSliderUI()
+        
+    }
+
     // Fires when user attempts to navigate to Settings view
     // passes delegate information to Settings view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -117,13 +129,33 @@ class TipViewController: UIViewController, TipperUpdateProtocol, UITextFieldDele
     
     // Calculate tip and update view
     private func updateTipView(){
+        // get 0-> tip and 1-> total
+        let tipAndTotal = getTipAndTotal()
+        
+        tipLabel.text = FormatUtility.numberToCurrencyString(value: tipAndTotal[0] as NSNumber) ?? ""
+        totalLabel.text = FormatUtility.numberToCurrencyString(value: tipAndTotal[1] as NSNumber) ?? ""
+        
+        // change slider's per person bill value
+        updateSliderUI()
+    }
+    
+    // Update Slider's label to show the bill split between N number of people
+    private func updateSliderUI(){
+        let tipAndTotal = getTipAndTotal()
+        let N:Int = Int(billSlider.value)
+        let totalSplitNways:Double = tipAndTotal[1] / Double(N)
+        billSplitField.text = FormatUtility.numberToCurrencyString(value: totalSplitNways as NSNumber) ?? ""
+    }
+    
+    // return array of Doubles
+    // index 0-> tip, 1-> total
+    private func getTipAndTotal() -> [Double]{
         let bill = FormatUtility.numberStringToDecimal(word: billField.text!) ?? 0
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
         let total = bill + tip
-        
-        tipLabel.text = FormatUtility.numberToCurrencyString(value: tip as NSNumber) ?? ""
-        totalLabel.text = FormatUtility.numberToCurrencyString(value: total as NSNumber) ?? ""
+        return [tip, total]
     }
+    
     
     
 }

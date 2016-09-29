@@ -25,6 +25,7 @@ The following **additional** features are implemented:
 - [] List anything else that you can get done to improve the app functionality!
 * [X] Added a splash screen
 * [X] Added a simple app icon
+* [X] Added a bill total split per person calculation (a slider that when changed would divide the total by a factor of X)
 
 ## Video Walkthrough 
 
