@@ -28,7 +28,7 @@ class TipViewController: UIViewController, TipperUpdateProtocol, UITextFieldDele
         super.viewDidLoad()
         
         loadSavedBillAndTipIndex()
-        // Do any additional setup after loading the view, typically from a nib.
+        
         updateTipper() // update segmented tip control and update tip when entering view (in case settings tip% changes)
         
         // load currency symbol
